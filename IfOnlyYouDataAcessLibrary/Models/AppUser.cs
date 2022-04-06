@@ -8,5 +8,9 @@ namespace IfOnlyYouDataAccessLibrary.Models
 
         [MaxLength(40)]
         public string UserName { get; set; } = string.Empty;
+
+        public byte[] PasswordHash { get; set; } = new byte[] { };
+
+        public byte[] PasswordSalt { get; set; } = new byte[] { };
     }
 }

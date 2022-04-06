@@ -1,12 +1,11 @@
 ﻿using IfOnlyYou.IServices;
 using IfOnlyYouDataAccessLibrary.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IfOnlyYou.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class UsersController : ControllerBase
+    public class UsersController : BasicApiController
     {
         private readonly IUsersService _usersService;
 
@@ -16,6 +15,7 @@ namespace IfOnlyYou.Controllers
         }
 
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {
@@ -24,6 +24,7 @@ namespace IfOnlyYou.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetAllUsers()
         {
