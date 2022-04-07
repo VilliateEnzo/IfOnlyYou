@@ -5,7 +5,9 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IfOnlyYou", "IfOnlyYou\IfOnlyYou.csproj", "{8BD99FC2-5B2E-47A6-A641-845AC1BB45BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IfOnlyYouDataAccessLibrary", "IfOnlyYouDataAcessLibrary\IfOnlyYouDataAccessLibrary.csproj", "{E64C81B1-721B-4703-9469-7811B4F80C6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IfOnlyYouDataAccessLibrary", "IfOnlyYouDataAcessLibrary\IfOnlyYouDataAccessLibrary.csproj", "{E64C81B1-721B-4703-9469-7811B4F80C6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IfOnlyYou.Tests", "IfOnlyYou.Tests\IfOnlyYou.Tests.csproj", "{D3279FB7-02CE-4BB7-9D9A-110CD0DAA590}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E64C81B1-721B-4703-9469-7811B4F80C6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E64C81B1-721B-4703-9469-7811B4F80C6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E64C81B1-721B-4703-9469-7811B4F80C6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3279FB7-02CE-4BB7-9D9A-110CD0DAA590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3279FB7-02CE-4BB7-9D9A-110CD0DAA590}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3279FB7-02CE-4BB7-9D9A-110CD0DAA590}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3279FB7-02CE-4BB7-9D9A-110CD0DAA590}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

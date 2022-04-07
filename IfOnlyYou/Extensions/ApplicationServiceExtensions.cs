@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IfOnlyYou.Extensions
 {
-    public static class AplicationServiceExtensions
+    public static class ApplicationServiceExtensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {

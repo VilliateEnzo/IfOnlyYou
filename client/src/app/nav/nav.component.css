@@ -1,0 +1,13 @@
+body .navbar-nav {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.myBut {
+    margin-right: 20px;
+}
+
+.dropdown-toggle,
+.dropdown-item {
+    cursor: pointer;
+}
