@@ -1,16 +1,18 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
     <div class="container">
-        <a class="navbar-brand" href="#">If only you</a>
-        <ul class="navbar-nav mr-auto" *ngIf="_accountService.currentUser$ | async">
-            <li class="nav-item" *ngFor="let option of menuOptions">
-                <a href="#" class="nav-link" (click)="option.TieneClick ? option.ClickFunction : ''">
-                    {{option.Name}}
-                </a>
-            </li>
+        <a class="navbar-brand" routerLink="/">If only you</a>
+        <ul class="navbar-nav mr-auto">
+            <ng-container *ngIf="_accountService.currentUser$ | async">
+                <li class="nav-item" *ngFor="let option of menuOptions">
+                    <a href="#" class="nav-link" routerLink="{{option.Link}}" routerLinkActive="active">
+                        {{option.Name}}
+                    </a>
+                </li>
+            </ng-container>
         </ul>
 
-        <div class="dropdown" *ngIf="_accountService.currentUser$ | async" dropdown>
-            <a class="dropdown-toggle text-light" dropdownToggle>Welcome User</a>
+        <div class="dropdown" *ngIf="(_accountService.currentUser$ | async) as user" dropdown>
+            <a class="dropdown-toggle text-light" dropdownToggle style="text-decoration: none;">Welcome {{user.username | titlecase}}</a>
             <div class="dropdown-menu mt-3" *dropdownMenu>
                 <a href="#" class="dropdown-item">Edit Profile</a>
                 <div class="dropdown-divider"></div>
@@ -21,7 +23,7 @@
         <form *ngIf="(_accountService.currentUser$ | async) === null" #loginFrom="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()" autocomplete="off">
             <input name="username" [(ngModel)]="model.username" class="form-control mr-sm-2" type="text" placeholder="Username">
             <input name="password" [(ngModel)]="model.password" class="form-control mr-sm-2" type="password" placeholder="Password">
-            <Button class="btn btn-outline-info my-2 my-sm-0" type="submit">Login</Button>
+            <Button class="btn btn-success my-2 my-sm-0" type="submit">Login</Button>
         </form>
     </div>
 </nav>

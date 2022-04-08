@@ -4,6 +4,8 @@ import { AccountService } from '../_services/account.service';
 import { MenuOption } from '../_models/MenuOption';
 import { Observable } from 'rxjs';
 import { User } from '../_models/user';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav',
@@ -12,18 +14,16 @@ import { User } from '../_models/user';
 })
 export class NavComponent implements OnInit {
 
-  a = new MenuOption("Matches", "", false, false, "")
-
   menuOptions: MenuOption[] =
     [
-      new MenuOption("Matches", "", false, false, ""),
-      new MenuOption("Lists", "", false, false, ""),
-      new MenuOption("Messages", "", false, false, ""),
+      new MenuOption("Matches", "/members", true),
+      new MenuOption("Lists", "/lists", true),
+      new MenuOption("Messages", "/messages", true),
     ];
 
   model: any = {};
 
-  constructor(public _accountService: AccountService) { }
+  constructor(public _accountService: AccountService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -31,14 +31,15 @@ export class NavComponent implements OnInit {
   login(): void {
     this._accountService.loginUser(this.model).subscribe(
       result => {
-        console.log(result)
+        this.router.navigateByUrl('/members')
       },
       error => {
-        console.log(error)
+        this.toastr.error(error.error)
       })
   }
 
   logout(): void {
     this._accountService.logout()
+    this.router.navigateByUrl('/')
   }
 }
