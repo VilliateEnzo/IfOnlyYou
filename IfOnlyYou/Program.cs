@@ -1,6 +1,7 @@
 using System.Text;
 using IfOnlyYou.Extensions;
 using IfOnlyYou.IServices;
+using IfOnlyYou.Middleware;
 using IfOnlyYou.Services;
 using IfOnlyYouDataAccessLibrary.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -43,6 +44,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseHttpsRedirection();
 app.UseCors(myAllowSpecificOrigins);
 app.UseAuthentication();

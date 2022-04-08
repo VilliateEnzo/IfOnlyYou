@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { HomeComponent } from './home/home.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
@@ -20,7 +22,13 @@ const routes: Routes = [
       { path: 'messages', component: MessagesComponent },
     ]
   },
-  { path: '**', component: HomeComponent, pathMatch: 'full' }
+  {
+    path: 'errors',
+    loadChildren: () => import('./errors/errors.module').then(m => m.ErrorsModule)
+  },
+  {
+    path: '**', redirectTo: 'errors/not-found'
+  }
 ];
 
 @NgModule({

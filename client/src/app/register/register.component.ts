@@ -22,9 +22,6 @@ export class RegisterComponent implements OnInit {
     this._accountService.register(this.model).subscribe(
       result => {
         this.router.navigateByUrl('/members')
-      },
-      error => {
-        this.toastr.error(error.error)
       })
   }
 

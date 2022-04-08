@@ -11,6 +11,7 @@ namespace IfOnlyYou.Extensions
         {
             services.AddScoped<IUsersService, UsersService>(); //or AddTransient
             services.AddScoped<IAccountService, AccountService>(); //or AddTransient
+            services.AddScoped<IBuggyService, BuggyService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddDbContext<DataContext>(options =>
             {

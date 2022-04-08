@@ -25,7 +25,7 @@ namespace IfOnlyYou.Services
         {
             if (await UserExist(registerDto.Username))
             {
-                throw new CustomAttributeFormatException("Username is taken.");
+                throw new Exception("Username is taken.");
             }
 
             var user = HashPassword(registerDto);
@@ -46,12 +46,12 @@ namespace IfOnlyYou.Services
 
             if (user == null)
             {
-                throw new CustomAttributeFormatException("Invalid username");
+                throw new Exception("Invalid username");
             }
 
             if (!PasswordMatch(user, loginDto.password))
             {
-                throw new CustomAttributeFormatException("Invalid password");
+                throw new Exception("Invalid password");
             }
 
             return new UserDto()
