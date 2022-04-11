@@ -14,16 +14,18 @@ namespace IfOnlyYou.Services
     {
         private readonly ITokenService _tokenService;
         private readonly DataContext _dataContext;
+        private readonly IUsersService _userService;
 
-        public AccountService(DataContext repository, ITokenService tokenService)
+        public AccountService(DataContext repository, ITokenService tokenService, IUsersService userService)
         {
             _tokenService = tokenService;
             _dataContext = repository;
+            _userService = userService;
         }
 
         public async Task<UserDto> Register(RegisterDto registerDto)
         {
-            if (await UserExist(registerDto.Username))
+            if (await _userService.UserExistByUsernameAsync(registerDto.Username))
             {
                 throw new Exception("Username is taken.");
             }
@@ -91,11 +93,5 @@ namespace IfOnlyYou.Services
 
             return user;
         }
-
-        private async Task<bool> UserExist(string username)
-        {
-            return await _dataContext.Users.AnyAsync(u => u.UserName == username);
-        }
-
     }
 }

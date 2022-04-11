@@ -2,6 +2,8 @@
 using IfOnlyYou.Services;
 using IfOnlyYouDataAccessLibrary.Data;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using IfOnlyYouDataAccessLibrary.Helpers;
 
 namespace IfOnlyYou.Extensions
 {
@@ -9,10 +11,11 @@ namespace IfOnlyYou.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
-            services.AddScoped<IUsersService, UsersService>(); //or AddTransient
-            services.AddScoped<IAccountService, AccountService>(); //or AddTransient
+            services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IBuggyService, BuggyService>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlServer(config.GetConnectionString("Default"));

@@ -1,36 +1,43 @@
-﻿using IfOnlyYou.IServices;
+﻿using AutoMapper;
+using IfOnlyYou.IServices;
+using IfOnlyYouDataAccessLibrary.DTOs;
 using IfOnlyYouDataAccessLibrary.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IfOnlyYou.Controllers
 {
+    [Authorize]
     public class UsersController : BasicApiController
     {
         private readonly IUsersService _usersService;
+        private readonly IMapper _mapper;
 
-        public UsersController(IUsersService usersService)
+        public UsersController(IUsersService usersService, IMapper mapper)
         {
             _usersService = usersService;
+            _mapper = mapper;
         }
 
 
-        [Authorize]
         [HttpGet("{id}")]
-        public async Task<ActionResult<AppUser>> GetUser(int id)
+        public async Task<ActionResult<MemberDto>> GetUser(int id)
         {
-            var result = await _usersService.GetUser(id);
+            var user = await _usersService.GetUserAsync(id);
 
-            return Ok(result);
+            return _mapper.Map<MemberDto>(user); ;
         }
 
-        [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppUser>>> GetAllUsers()
+        public async Task<IEnumerable<MemberDto>> GetAllUsers()
         {
-            var result = await _usersService.GetAllUsers();
+            return await _usersService.GetAllUsersAsync(); ;
+        }
 
-            return Ok(result);
+        [HttpGet("{username}")]
+        public async Task<ActionResult<MemberDto>> GetUser(string username)
+        {
+            return await _usersService.GetMemberByUsernameAsync(username);
         }
     }
 }
