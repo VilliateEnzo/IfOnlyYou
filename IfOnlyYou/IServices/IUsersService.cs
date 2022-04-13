@@ -6,7 +6,9 @@ namespace IfOnlyYou.IServices
     public interface IUsersService
     {
         Task<AppUser> GetUserAsync(int id);
-        Task<IEnumerable<MemberDto>> GetAllUsersAsync();
+        Task<MemberDto> GetMemberByIdAsync(int id);
+        Task<IEnumerable<AppUser>> GetAllUsersAsync();
+        Task<IEnumerable<MemberDto>> GetAllMembersAsync();
         Task<bool> UserExistByUsernameAsync(string username);
         Task<AppUser> GetUserByUsernameAsync(string username);
         Task<MemberDto> GetMemberByUsernameAsync(string username);

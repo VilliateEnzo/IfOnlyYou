@@ -33,7 +33,19 @@ namespace IfOnlyYou.Services
             return user;
         }
 
-        public async Task<IEnumerable<MemberDto>> GetAllUsersAsync()
+        public async Task<IEnumerable<AppUser>> GetAllUsersAsync()
+        {
+            var users = await _dataContext.Users.ToListAsync();
+
+            if (users.Count == 0)
+            {
+                throw new CustomAttributeFormatException("there is no users");
+            }
+
+            return users;
+        }
+
+        public async Task<IEnumerable<MemberDto>> GetAllMembersAsync()
         {
             var users = await _dataContext.Users
                 .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
@@ -45,6 +57,7 @@ namespace IfOnlyYou.Services
             }
 
             return users;
+
         }
 
         public async Task<bool> UserExistByUsernameAsync(string username)
@@ -78,6 +91,21 @@ namespace IfOnlyYou.Services
             if (user == null)
             {
                 throw new CustomAttributeFormatException("there is no user with that username");
+            }
+
+            return user;
+        }
+
+        public async Task<MemberDto> GetMemberByIdAsync(int id)
+        {
+            var user = await _dataContext.Users
+                .Where(u => u.Id == id)
+                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync();
+
+            if (user == null)
+            {
+                throw new CustomAttributeFormatException("there is no user with that id");
             }
 
             return user;

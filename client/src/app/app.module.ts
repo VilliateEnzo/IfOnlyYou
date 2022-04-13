@@ -16,6 +16,7 @@ import { ListsComponent } from './lists/lists.component';
 import { SharedModule } from './shared/shared.module';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { ErrorsModule } from './errors/errors.module';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,11 +35,12 @@ import { ErrorsModule } from './errors/errors.module';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    SharedModule,
-    ErrorsModule
+    ErrorsModule,
+    SharedModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     AppService
   ],
   bootstrap: [AppComponent]

@@ -23,19 +23,17 @@ namespace IfOnlyYou.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<MemberDto>> GetUser(int id)
         {
-            var user = await _usersService.GetUserAsync(id);
-
-            return _mapper.Map<MemberDto>(user); ;
+            return await _usersService.GetMemberByIdAsync(id);
         }
 
         [HttpGet]
         public async Task<IEnumerable<MemberDto>> GetAllUsers()
         {
-            return await _usersService.GetAllUsersAsync(); ;
+            return await _usersService.GetAllMembersAsync(); ;
         }
 
-        [HttpGet("{username}")]
-        public async Task<ActionResult<MemberDto>> GetUser(string username)
+        [HttpGet("getMember/{username}")]
+        public async Task<ActionResult<MemberDto>> GetUserByUsername(string username)
         {
             return await _usersService.GetMemberByUsernameAsync(username);
         }
