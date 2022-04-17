@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MemberDetailComponent } from './member-detail/member-detail.component';
 import { MemberListComponent } from './member-list/member-list.component';
-import { MembersRoutingModule } from './members-routing.module';
+import { MemberRoutingModule } from './member-routing.module';
 import { MemberCardComponent } from './member-card/member-card.component';
 import { SharedModule } from '../shared/shared.module';
 import { MemberGalleryComponent } from './member-gallery/member-gallery.component';
+import { MemberEditComponent } from './member-edit/member-edit.component';
 
 
 
@@ -14,12 +15,13 @@ import { MemberGalleryComponent } from './member-gallery/member-gallery.componen
     MemberDetailComponent,
     MemberListComponent,
     MemberCardComponent,
-    MemberGalleryComponent
+    MemberGalleryComponent,
+    MemberEditComponent
   ],
   imports: [
     CommonModule,
-    MembersRoutingModule,
+    MemberRoutingModule,
     SharedModule
   ]
 })
-export class MembersModule { }
+export class MemberModule { }

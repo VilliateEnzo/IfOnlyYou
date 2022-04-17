@@ -4,6 +4,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [],
@@ -14,13 +16,15 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
       positionClass: 'toast-bottom-right'
     }),
     TabsModule.forRoot(),
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    FormsModule,
   ],
   exports: [
     BsDropdownModule,
     ToastrModule,
     TabsModule,
-    CarouselModule
+    CarouselModule,
+    FormsModule,
   ]
 })
 export class SharedModule { }

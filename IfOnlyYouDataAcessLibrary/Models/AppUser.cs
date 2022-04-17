@@ -29,22 +29,18 @@ namespace IfOnlyYouDataAccessLibrary.Models
         [MaxLength(50)]
         public virtual string Gender { get; set; } = string.Empty;
 
+        [MaxLength(50)]
         public virtual string LookingFor { get; set; } = string.Empty;
 
-        public virtual ICollection<Interest> Interests { get; set; }
+        [MaxLength(400)]
+        public virtual string Interests { get; set; } = string.Empty;
 
         [MaxLength(120)]
         public string City { get; set; } = string.Empty;
 
         [MaxLength(120)]
         public string Country { get; set; } = string.Empty;
-
+        
         public ICollection<Photo> Photos { get; set; }
-
-
-        //public int GetAge()
-        //{
-           // return DateOfBirth.CalculateAge();
-        //}
     }
 }

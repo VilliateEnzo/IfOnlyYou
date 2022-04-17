@@ -26,7 +26,6 @@ namespace IfOnlyYou.Tests.Services
             var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
             _usersServiceMock = new Mock<IUsersService>();
             _myDbContextMock = new Mock<DataContext>(optionsBuilder.Options);
-            _target = new UsersService(_myDbContextMock.Object);
         }
 
         [Test()]

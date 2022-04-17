@@ -22,21 +22,6 @@ namespace IfOnlyYouDataAccessLibrary.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("AppUserInterest", b =>
-                {
-                    b.Property<int>("InterestsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("InterestsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("AppUserInterest");
-                });
-
             modelBuilder.Entity("IfOnlyYouDataAccessLibrary.Models.AppUser", b =>
                 {
                     b.Property<int>("Id")
@@ -66,6 +51,11 @@ namespace IfOnlyYouDataAccessLibrary.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("Interests")
+                        .IsRequired()
+                        .HasMaxLength(400)
+                        .HasColumnType("nvarchar(400)");
+
                     b.Property<string>("Introduction")
                         .IsRequired()
                         .HasMaxLength(400)
@@ -81,7 +71,8 @@ namespace IfOnlyYouDataAccessLibrary.Migrations
 
                     b.Property<string>("LookingFor")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<byte[]>("PasswordHash")
                         .IsRequired()
@@ -99,29 +90,6 @@ namespace IfOnlyYouDataAccessLibrary.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("IfOnlyYouDataAccessLibrary.Models.Interest", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(400)
-                        .HasColumnType("nvarchar(400)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(120)
-                        .HasColumnType("nvarchar(120)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Interests");
                 });
 
             modelBuilder.Entity("IfOnlyYouDataAccessLibrary.Models.Photo", b =>
@@ -151,21 +119,6 @@ namespace IfOnlyYouDataAccessLibrary.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("Photos");
-                });
-
-            modelBuilder.Entity("AppUserInterest", b =>
-                {
-                    b.HasOne("IfOnlyYouDataAccessLibrary.Models.Interest", null)
-                        .WithMany()
-                        .HasForeignKey("InterestsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("IfOnlyYouDataAccessLibrary.Models.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("IfOnlyYouDataAccessLibrary.Models.Photo", b =>

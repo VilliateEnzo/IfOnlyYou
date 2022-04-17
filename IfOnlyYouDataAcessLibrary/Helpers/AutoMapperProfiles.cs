@@ -18,7 +18,7 @@ namespace IfOnlyYouDataAccessLibrary.Helpers
                 .ForMember(des => des.PhotoUrl, option => option.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ForMember(des => des.Age, option => option.MapFrom(src => src.DateOfBirth.CalculateAge()));
             CreateMap<Photo, PhotoDto>();
-            CreateMap<Interest, InterestDto>();
+            CreateMap<MemberUpdateDto, AppUser>();
         }
     }
 }

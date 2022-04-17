@@ -12,6 +12,7 @@ namespace IfOnlyYou.IServices
         Task<bool> UserExistByUsernameAsync(string username);
         Task<AppUser> GetUserByUsernameAsync(string username);
         Task<MemberDto> GetMemberByUsernameAsync(string username);
+        Task<bool> UpdateUser(MemberUpdateDto memberUpdateDto, string username);
         void Update(AppUser user);
         Task<bool> SaveAllAsync();
     }

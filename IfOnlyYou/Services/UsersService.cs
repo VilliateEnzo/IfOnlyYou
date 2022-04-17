@@ -68,7 +68,6 @@ namespace IfOnlyYou.Services
         public async Task<AppUser> GetUserByUsernameAsync(string username)
         {
             var user = await _dataContext.Users
-                .Include(u => u.Interests)
                 .Include(u => u.Photos)
                 .SingleOrDefaultAsync(u => u.UserName == username);
 
@@ -119,6 +118,16 @@ namespace IfOnlyYou.Services
         public void Update(AppUser user)
         {
             _dataContext.Entry(user).State = EntityState.Modified;
+        }
+
+        public async Task<bool> UpdateUser(MemberUpdateDto memberUpdateDto, string username)
+        {
+            var user = await GetUserByUsernameAsync(username);
+            _mapper.Map(memberUpdateDto, user);
+
+            _dataContext.Update(user);
+
+            return await SaveAllAsync();
         }
     }
 }

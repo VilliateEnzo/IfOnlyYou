@@ -33,6 +33,7 @@ namespace IfOnlyYou.Services
             var user = HashPassword(registerDto);
 
             _dataContext.Users.Add(user);
+
             await _dataContext.SaveChangesAsync();
 
             return new UserDto()

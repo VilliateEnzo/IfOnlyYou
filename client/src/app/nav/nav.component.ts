@@ -13,7 +13,7 @@ export class NavComponent implements OnInit {
 
   menuOptions: MenuOption[] =
     [
-      new MenuOption("Matches", "/members", true),
+      new MenuOption("Matches", "/member", true),
       new MenuOption("Lists", "/lists", true),
       new MenuOption("Messages", "/messages", true),
     ];
@@ -28,7 +28,7 @@ export class NavComponent implements OnInit {
   login(): void {
     this._accountService.loginUser(this.model).subscribe(
       result => {
-        this.router.navigateByUrl('/members')
+        this.router.navigateByUrl('/member')
       })
   }
 
