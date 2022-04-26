@@ -7,6 +7,7 @@ import { MemberCardComponent } from './member-card/member-card.component';
 import { SharedModule } from '../shared/shared.module';
 import { MemberGalleryComponent } from './member-gallery/member-gallery.component';
 import { MemberEditComponent } from './member-edit/member-edit.component';
+import { PhotoEditorComponent } from './photo-editor/photo-editor.component';
 
 
 
@@ -16,7 +17,8 @@ import { MemberEditComponent } from './member-edit/member-edit.component';
     MemberListComponent,
     MemberCardComponent,
     MemberGalleryComponent,
-    MemberEditComponent
+    MemberEditComponent,
+    PhotoEditorComponent
   ],
   imports: [
     CommonModule,

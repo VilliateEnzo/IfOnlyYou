@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using IfOnlyYou.Extensions;
 using IfOnlyYou.IServices;
 using IfOnlyYouDataAccessLibrary.DTOs;
 using IfOnlyYouDataAccessLibrary.Models;
@@ -42,9 +43,7 @@ namespace IfOnlyYou.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {
-            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            if (await _usersService.UpdateUser(memberUpdateDto, username)) return NoContent();
+            if (await _usersService.UpdateUser(memberUpdateDto, User.GetUsername())) return NoContent();
 
             return BadRequest("Failed to update user");
         }

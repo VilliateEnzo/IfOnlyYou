@@ -5,6 +5,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { FormsModule } from '@angular/forms';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { FormsModule } from '@angular/forms';
     }),
     TabsModule.forRoot(),
     CarouselModule.forRoot(),
+    FileUploadModule,
     FormsModule,
   ],
   exports: [
@@ -24,6 +26,7 @@ import { FormsModule } from '@angular/forms';
     ToastrModule,
     TabsModule,
     CarouselModule,
+    FileUploadModule,
     FormsModule,
   ]
 })

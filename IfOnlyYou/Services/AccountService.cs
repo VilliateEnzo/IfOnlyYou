@@ -45,7 +45,7 @@ namespace IfOnlyYou.Services
 
         public async Task<UserDto> Login(LoginDto loginDto)
         {
-            var user = await _dataContext.Users.SingleOrDefaultAsync(x => x.UserName == loginDto.username);
+            var user = await _userService.GetUserByUsernameAsync(loginDto.username);
 
             if (user == null)
             {
@@ -60,7 +60,8 @@ namespace IfOnlyYou.Services
             return new UserDto()
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
+                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
             };
         }
 
