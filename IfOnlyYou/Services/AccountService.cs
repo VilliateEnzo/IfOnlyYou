@@ -2,6 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Transactions;
+using AutoMapper;
 using IfOnlyYou.IServices;
 using IfOnlyYouDataAccessLibrary.Data;
 using IfOnlyYouDataAccessLibrary.DTOs;
@@ -15,12 +16,14 @@ namespace IfOnlyYou.Services
         private readonly ITokenService _tokenService;
         private readonly DataContext _dataContext;
         private readonly IUsersService _userService;
+        private readonly IMapper _mapper;
 
-        public AccountService(DataContext repository, ITokenService tokenService, IUsersService userService)
+        public AccountService(DataContext repository, ITokenService tokenService, IUsersService userService, IMapper mapper)
         {
             _tokenService = tokenService;
             _dataContext = repository;
             _userService = userService;
+            _mapper = mapper;
         }
 
         public async Task<UserDto> Register(RegisterDto registerDto)
@@ -30,16 +33,22 @@ namespace IfOnlyYou.Services
                 throw new Exception("Username is taken.");
             }
 
-            var user = HashPassword(registerDto);
+            var user = _mapper.Map<AppUser>(registerDto);
+
+            using var hmac = new HMACSHA512();
+
+            user.UserName = registerDto.Username.ToLower();
+            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
+            user.PasswordSalt = hmac.Key;
 
             _dataContext.Users.Add(user);
-
             await _dataContext.SaveChangesAsync();
 
             return new UserDto()
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
+                KnownAs = user.KnownAs
             };
         }
 
@@ -61,7 +70,8 @@ namespace IfOnlyYou.Services
             {
                 Username = user.UserName,
                 Token = _tokenService.CreateToken(user),
-                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
+                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
+                KnownAs = user.KnownAs
             };
         }
 
@@ -80,20 +90,6 @@ namespace IfOnlyYou.Services
             }
 
             return true;
-        }
-
-        private static AppUser HashPassword(RegisterDto registerDto)
-        {
-            using var hmac = new HMACSHA512();
-
-            var user = new AppUser()
-            {
-                UserName = registerDto.Username.ToLower(),
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                PasswordSalt = hmac.Key
-            };
-
-            return user;
         }
     }
 }
